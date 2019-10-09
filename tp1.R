@@ -26,3 +26,23 @@ pacf(logseriemd1, lag.max=30)
 #ce qui indique la nécessité d’une différentiation saisonnière.
 logseriemd1D1 <- diff(logseriemd1, lag=12, d=1)
 plot.ts(logseriemd1D1) # ∇∇12y(t)
+
+#acf et pacf de la serie differenciee
+acf(logseriemd1D1, lag.max=30)
+pacf(logseriemd1D1, lag.max=30)
+#toujours pas stationnaire du coup car ca sort de l'intervalle a plusieurs reprises 
+
+# ca ressemble à un MA(q) ou un AR(q) ?  ou aucun? 
+
+
+
+
+# estiamtion de la tendance par moyennes mobiles 
+fit.decompose <- decompose(seriem)
+plot(fit.decompose)
+fit.decompose2 <- decompose(seriem,type='multiplicative')
+plot(fit.decompose2)
+
+# stl permet de réaliser les estimations pour un modèle additif, par maximum de vraisemblance.
+fit.stl <- stl(seriem,s.window=12)
+plot(fit.stl)
